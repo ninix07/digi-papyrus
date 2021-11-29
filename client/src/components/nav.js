@@ -1,11 +1,11 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './nav.css'
 import logo from '../assets/images/logo.svg'
 import Login from './login'
 import threeline from '../assets/images/threeline.png'
 import search from '../assets/images/search.png'
 import { useState } from 'react'
+import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function Nav() {
     const [nav, setNav] = useState("verticalnav");
