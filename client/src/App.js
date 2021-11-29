@@ -1,15 +1,12 @@
 import './App.css';
 import Bookself from './components/bookself';
 import Nav from './components/nav';
-
 function App() {
   return (
-
     <div className="app">
       <div>
         <Nav/>
       </div>
-
       <div className="books">
         <Bookself content="Recently read" books={[
           {
@@ -167,6 +164,7 @@ function App() {
 
 
       </div>
+
     </div>
   )
 }
