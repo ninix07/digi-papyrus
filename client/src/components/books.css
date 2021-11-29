@@ -1,0 +1,46 @@
+.book {
+  display: flex;
+  color: black;
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+  margin-bottom:0px;
+  justify-content: center;
+  align-items: center;
+  text-align: flex-start;
+}
+.bookname{
+    font-size: 14px;
+    font-weight: bold;
+
+}
+.self{
+    padding-right: 50px;
+    justify-content: flex-end;
+    height: 205px;
+    border: 60px solid #0A264B;
+    border-top: none;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+}
+.content{
+  background-color: #0A264B;
+  height: 60px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content h1{
+  background-color: white;
+  color: #0A264B;
+  border-radius: 20px;
+  padding: 0px 20px;
+  width: 400px;
+}
+.whole{
+  margin-top: -60px;
+}
+.card{
+  position: absolute;
+  background-color: green;
+}

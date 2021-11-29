@@ -1,0 +1,10 @@
+.app {
+  overflow-x: hidden;
+  background-color: #d0cefa;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.books{
+  margin: 200px;
+}

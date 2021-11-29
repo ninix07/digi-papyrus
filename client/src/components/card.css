@@ -1,0 +1,51 @@
+.card{
+    color: white;
+    border: 2px solid white;
+    height: 462px;
+    width: 251px;
+}
+.rectangle{
+    background-color: #F9B8B8;
+    width: 251px;
+    height: 200px;
+}
+.bookcover{
+    width: 251px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+.contents{
+    margin-top: 83px;
+    margin-left: 25px;
+}
+.contents h3{
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+}
+.contents h1{
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
+}
+.contents h2{
+    margin: 0;
+    padding: 0;
+    font-weight: lighter;
+    font-size: 18px;
+}
+.contents button{
+    background-color: transparent;
+    border: 2px solid white;
+    font-size: 12;
+    font-weight: bold;
+    color: white;
+    height: 38px;
+    width: 170px;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: left;
+}
