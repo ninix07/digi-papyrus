@@ -1,5 +1,5 @@
 import './books.css'
-import Card from './card'
+// import Card from './card'
 import { useState } from 'react';
 function Books(prop) {
     const book = {
@@ -17,7 +17,7 @@ function Books(prop) {
     return (
         <div onMouseEnter={mouseenter} onMouseLeave={mouseleave}>
             <div className="card" style={{ opacity: oopacity }}>
-                <Card className="card" genre="Horror" booktitle={prop.bookname} writer={prop.writersname} />
+                {/* <Card className="card" genre="Horror" booktitle={prop.bookname} writer={prop.writersname} /> */}
             </div>
             <div style={book} className='book'>
                 <p className="bookname">{prop.bookname}<br />{prop.writersname}</p>

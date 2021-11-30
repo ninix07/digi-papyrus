@@ -1,6 +1,6 @@
 import './App.css';
-import Bookself from './components/bookself';
-import Nav from './components/nav';
+import Bookself from './components/books/bookself';
+import Nav from './components/nav/nav';
 function App() {
   return (
     <div className="app">
@@ -89,8 +89,6 @@ function App() {
             height: '190px',
             description: " adkf;la jadkl"
           }]} />
-
-
         <Bookself content="Top Choices" books={[
           {
             writer: "Nirjal adkljf",
@@ -161,8 +159,6 @@ function App() {
             width: '51px',
             height: '190px',
           }]} />
-
-
       </div>
 
     </div>

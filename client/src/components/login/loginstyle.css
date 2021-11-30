@@ -1,52 +1,38 @@
-
-.container{
-  background-color: #23272b;
-}
-.loginsignup {
-  font-weight: bold;
-  background-color: #8cc0df;
-  border: none;
-  color: #2a3e50;
-  padding: 1vh 3vw;
-  margin-left: 5vw;
-}
-
-/* login pages */
-.login {
+.login{
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  color: #f2faff;
+  transform: translate(-50%,-50%);
+  color: #F2FAFF;
   display: flex;
   flex-direction: column;
   z-index: 1;
 }
-.login h1 {
+.login h1{
   text-align: center;
 }
-.login input {
+.login input{
   border: none;
-  background-color: #f2faff;
+  background-color: #F2FAFF;
   padding: 2vh 3vw;
   display: block;
   margin-bottom: 2vh;
   width: 40vw;
 }
-.sumbit {
+.sumbit{
   margin-top: 2vh;
   width: 40vw;
   padding: 2vh 3vw;
   border: none;
   font-weight: bold;
-  color: #23272b;
+  color: #23272B;
   font-size: large;
-  background-color: #8cc0df;
+  background-color: #8CC0DF;
 }
-.login a {
+.login a{
   text-decoration: underline;
   cursor: pointer;
 }
-.login p {
+.login p{
   text-align: left;
 }

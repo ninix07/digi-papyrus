@@ -5,7 +5,7 @@ function Card(prop) {
     return (
         <div className="card">
             <div className="bookcover">
-                <img src={require("../assets/images/bookcover.png").default} alt="Book Cover" />
+                {/* <img src={require("../assets/images/bookcover.png").default} alt="Book Cover" /> */}
             </div>
             <div className="rectangle" />
             <div className="contents">
