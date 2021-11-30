@@ -1,4 +1,4 @@
-import './loginstyle.css'
+import { Link } from 'react-router-dom';
 function Signup() {
     return (
         <div class="login">
@@ -7,7 +7,7 @@ function Signup() {
             <input type="email" placeholder="Email Address" />
             <input type="password" placeholder="Password" />
             <input type="password" placeholder="Confirm Password" />
-            <a href="transition.html"><button class="sumbit">Continue</button></a>
+            <Link to="/transition"><button class="sumbit">Continue</button></Link>
         </div>
     )
 }
