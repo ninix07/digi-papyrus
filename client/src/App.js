@@ -6,7 +6,7 @@ import Transition from './components/login/transition'
 import Newpassword from './components/login/newpassword';
 import Forget from './components/login/forget'
 import Nav from './components/nav/nav';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router,Route } from 'react-router-dom';
 function App() {
   return (
     <Router>
