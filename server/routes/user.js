@@ -7,7 +7,7 @@ const user = express();
 user.use(express.json);
 user.use(cors);
 
-user.post('/db', async (req, res) => {
+user.post('/register', async (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;

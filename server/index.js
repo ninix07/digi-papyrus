@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const cors = require('cors')
 const app = express();
 const bcrypt = require("bcryptjs")
-const passport = require("passport")
 
 const UserModel = require('./models/signupUsermodel')
 
@@ -16,11 +15,10 @@ mongoose.connect(URL, {
 });
 
 // app.use('/api',require('./routes/user'));
-app.post('/api/db', async (req, res) => {
+app.post('/api/register', async (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    const password2 = req.body.password2
 
     UserModel.findOne({ email: email })
         .then(user => {
@@ -37,10 +35,8 @@ app.post('/api/db', async (req, res) => {
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(user1.password, salt, (err, hash) => {
                         if (err) throw err;
-
                         // hashed password saved
                         user1.password = hash;
-
                         //saving user info in daabase
                         try {
                             user1.save();
@@ -49,16 +45,13 @@ app.post('/api/db', async (req, res) => {
                         catch (err) {
                             console.log(err);
                         }
-                    }
-                    )
-                }
-                )
-
+                    })
+                })
             }
-        }
-        )
-    }
-)
+        })
+})
+
+
 app.listen(5000, () => {
     console.log("server started");
 })

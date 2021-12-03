@@ -24,7 +24,7 @@ function App() {
         }
         else {
             e.preventDefault();
-            const url = 'http://localhost:5000/api/db/'
+            const url = 'http://localhost:5000/api/register/'
             axios.post(url, {
                 name: name,
                 email: email,
