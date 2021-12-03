@@ -12,6 +12,7 @@ function App() {
     <Router>
       <div className="app">
         <Nav />
+        {/* changing the links using route and links */}
         <Route path="/" exact component={Bookpage} />
         <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup} />

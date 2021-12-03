@@ -6,6 +6,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Nav() {
+
+    //vertical bar using burger
     const [navvertical, setnavvertical] = useState("verticalnav");
     function action() {
         if (navvertical === "verticalnav") {
@@ -15,6 +17,8 @@ function Nav() {
             setnavvertical('verticalnav')
         }
     }
+
+    //search bar extension
     const [searchbar, setsearchbar] = useState("searchbar")
     const [digi, setdigi] = useState('digi')
     function searchbarfunction() {

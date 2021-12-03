@@ -1,3 +1,5 @@
+//making a mongoose schema
+//collection designing
 const mongoose= require("mongoose");
 
 const UserSchema= new mongoose.Schema({

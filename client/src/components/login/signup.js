@@ -5,12 +5,15 @@ import axios from 'axios';
 
 
 function App() {
+    //use states to change the variable on change
     const [name, setname] = useState('');
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
     const [password2, setpassword2] = useState('');
 
-
+    //function 
+    //@params e event
+    //brief: cheaks all the validity and sends the api reqeust
     const addtolist = async (e) => {
         if (!name || !email || !password || !password2) {
             console.log("fill well")
@@ -24,6 +27,7 @@ function App() {
         }
         else {
             e.preventDefault();
+            // url wehre the data should be post 
             const url = 'http://localhost:5000/api/register/'
             axios.post(url, {
                 name: name,
