@@ -30,14 +30,19 @@ function Nav() {
     return (
         <div className="container">
             <div className='nav'>
-                <img src={logo} width="120px" alt="logo"/>
+                <img src={logo} width="120px" alt="logo" />
                 <ul>
-                    <li><a className={digi}>What is Digi-Papyrus ?</a></li>
-                    <li className={searchbar}><a><img onClick={searchbarfunction} src={search} width="24px" alt="searchicon"/><input type="text" placeholder="search" /></a></li>
-                    <li><a>Books</a></li>
-                    <li><a>Magazines</a></li>
-                    <li><a>Documents</a></li>
-                    <li className="burger"><a onClick={action}><img src={threeline} width="24px" alt="burgericon"></img></a></li>
+                    <li><Link to="/" className={digi}>What is Digi-Papyrus ?</Link></li>
+                    <li className={searchbar}>
+                        <Link to="/">
+                            <img onClick={searchbarfunction} src={search} width="24px" alt="searchicon" />
+                            <input type="text" placeholder="search" />
+                        </Link>
+                    </li>
+                    <li><Link to="/">Books</Link></li>
+                    <li><Link to="/">Magazines</Link></li>
+                    <li><Link to="/">Documents</Link></li>
+                    <li className="burger"><img onClick={action} src={threeline} width="24px" alt="burgericon"></img></li>
                 </ul>
             </div>
             <div className={navvertical}>
