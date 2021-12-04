@@ -1,9 +1,10 @@
 //imports
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors')
+const cors = require('cors');
 const app = express();
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
+const LocalStratgy = require('passport-local').Strategy;
 
 //importing schema
 const UserModel = require('./models/signupUsermodel')
@@ -38,24 +39,37 @@ app.post('/api/register', async (req, res) => {
                     email: email,
                     password: password,
                 })
-                //creates hash code
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(user1.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        // hashed password saved
-                        user1.password = hash;
-                        //saving user info in daabase
-                        try {
-                            user1.save();
-                            res.send('nirjal');
-                        }
-                        catch (err) {
-                            console.log(err);
-                        }
-                    })
-                })
+                user1.password = bcrypt.hash(user1.password, 12);
+                try {
+                    user1.save();
+                    res.send('nirjal');
+                }
+                catch (err) {
+                    console.log(err);
+                }
             }
         })
+})
+app.post('/api/login', async (req, res) => {
+    const email = req.body.username;
+    const password = req.body.password;
+
+    UserModel.findOne({ email: email })
+    .then(user => {
+        if (user) {
+            // user exists
+            const isMatch  = bcrypt.compare(user.password, password);
+            if(isMatch){
+                console.log("password matched")
+            }
+            else{
+                console.log("not matched")
+            }
+        }
+        else {
+           console.log("emailnotregistered")
+        }
+    })
 })
 
 //starts the server

@@ -6,7 +6,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Nav() {
-
     //vertical bar using burger
     const [navvertical, setnavvertical] = useState("verticalnav");
     function action() {

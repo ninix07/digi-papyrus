@@ -9,10 +9,10 @@ function Login() {
 
     const loginPostdata = async (e) => {
         e.preventDefault();
-        const url = 'http://localhost:2000/users/login/'
-        axios.post(url,{
-            username:username,
-            password:password,
+        const url = 'http://localhost:5000/api/login/'
+        axios.post(url, {
+            username: username,
+            password: password,
         })
             .then(res => {
                 console.log(res);
@@ -21,7 +21,7 @@ function Login() {
     }
 
     return (
-        <div class="login">
+        <div className="login">
             <h1>Login</h1>
             <input
                 type="textbox"
