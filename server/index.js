@@ -53,6 +53,7 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     const email = req.body.username;
     const password = req.body.password;
+    console.log("Data Taken ie  "+ email+"   "+password)
 
     UserModel.findOne({ email: email })
     .then(user => {
