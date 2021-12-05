@@ -7,18 +7,21 @@ const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer')
 
 //importing schema
-const UserModel = require('./models/signupUsermodel')
+const UserModel = require('./models/signupUsermodel');
+const { findOne } = require('./models/signupUsermodel');
 
-//for json used in api
+//for json used in api 
 app.use(express.json());
 app.use(cors())
-
 //url of mongodb atlas
 const URL = "mongodb+srv://admin:admin@digidb.kumya.mongodb.net/digidb?retryWrites=true&w=majority"
 mongoose.connect(URL, {
     useNewUrlParser: "true"
 });
 
+const message = {
+    message1:""
+}
 // app.use('/api',require('./routes/user'));
 app.post('/api/register', async (req, res) => {
     const name = req.body.name;
@@ -30,7 +33,11 @@ app.post('/api/register', async (req, res) => {
         .then(user => {
             if (user) {
                 // user exists
-                console.log("email already exist")
+                message.message1 = "Email already exist"
+                app.get('/message', async (req, res) => {
+                    console.log('here')
+                    res.status(200).json(message);
+                })
             }
             else {
                 var val = Math.floor(1000 + Math.random() * 9000);
@@ -53,6 +60,7 @@ app.post('/api/register', async (req, res) => {
                 }
             }
         })
+
 })
 app.post('/api/login', async (req, res) => {
     const email = req.body.username;

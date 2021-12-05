@@ -12,7 +12,6 @@
   text-align: center;
 }
 .login input{
-  border: none;
   background-color: #F2FAFF;
   padding: 2vh 3vw;
   display: block;
@@ -35,4 +34,10 @@
 }
 .login p{
   text-align: left;
+}
+.redborder{
+  border: 2px solid red;
+}
+.noborder{
+  border: none;
 }
