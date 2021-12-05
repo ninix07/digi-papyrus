@@ -53,24 +53,24 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     const email = req.body.username;
     const password = req.body.password;
-    console.log("Data Taken ie  "+ email+"   "+password)
+    console.log("Data Taken ie  " + email + "   " + password)
 
     UserModel.findOne({ email: email })
-    .then(user => {
-        if (user) {
-            // user exists
-            const isMatch  = bcrypt.compare(user.password, password);
-            if(isMatch){
-                console.log("password matched")
+        .then(user => {
+            if (user) {
+                // user exists
+                const isMatch = bcrypt.compare(user.password, password);
+                if (isMatch) {
+                    console.log("password matched")
+                }
+                else {
+                    console.log("not matched")
+                }
             }
-            else{
-                console.log("not matched")
+            else {
+                console.log("emailnotregistered")
             }
-        }
-        else {
-           console.log("emailnotregistered")
-        }
-    })
+        })
 })
 
 //starts the server
