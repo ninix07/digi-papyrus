@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
 const bcrypt = require("bcryptjs");
-const LocalStratgy = require('passport-local').Strategy;
+const nodemailer = require('nodemailer')
 
 //importing schema
 const UserModel = require('./models/signupUsermodel')
@@ -33,13 +33,17 @@ app.post('/api/register', async (req, res) => {
                 console.log("email already exist")
             }
             else {
+                var val = Math.floor(1000 + Math.random() * 9000);
+
                 //making a dchema
                 const user1 = new UserModel({
                     name: name,
                     email: email,
                     password: password,
+                    otp: val,
                 })
-                user1.password = bcrypt.hash(user1.password, 12);
+                user1.password = bcrypt.hashSync(user1.password, 10);
+                user1.otp = bcrypt.hashSync(user1.otp, 10);
                 try {
                     user1.save();
                     res.send('nirjal');
