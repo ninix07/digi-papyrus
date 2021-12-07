@@ -2,7 +2,7 @@
   "name": "digi-papyrus-reactjs",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:2000",
+  "proxy": "http://localhost:2000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
@@ -13,6 +13,7 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-tooltip": "^4.2.21",
+    "validator": "^13.7.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

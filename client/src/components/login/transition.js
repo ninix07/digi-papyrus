@@ -6,7 +6,7 @@ function Transition() {
             <h1>Transition Pin</h1>
             <input type="textbox" placeholder="******" />
             <Link to="/login"><button className="sumbit">Continue</button></Link>
-            <p>Didn't got transition pin? <link>Resend</link></p>
+            <p>Didn't got transition pin? <Link to="/">Resend</Link></p>
         </div>
     )
 }
