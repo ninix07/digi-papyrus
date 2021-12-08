@@ -15,8 +15,9 @@ const { findOne } = require('./models/signupUsermodel');
 //for json used in api 
 app.use(express.json());
 app.use(cors())
-//url of mongodb atlas
-const URL = "mongodb+srv://admin:admin@digidb.kumya.mongodb.net/digidb?retryWrites=true&w=majority"
+//url of mongodb atlas.
+dotenv.config({path:'./config.env'})
+const URL = process.env.URLDB;
 mongoose.connect(URL, {
     useNewUrlParser: "true"
 });
@@ -32,20 +33,20 @@ app.post('/api/register', async (req, res) => {
     const password2 = req.body.password2;
 
     if (!name || !email || !password || !password2) {
-        message.message1 = "Please fill in all fields";
+       return res.status(221).json({error:"Please fill in all fields"});
     }
 
     //checking password match
     else if (password !== password2) {
-        message.message1 = "Password didn't match";
+        return res.status(221).json({error:"Password didn't match"});;
     }
 
     //checking password length
     else if (password.length < 6) {
-        message.message1 = "Password must be 6 character long";
+        return res.status(221).json({error:"Password must be 6 characters long."});
     }
     else if (!validator.validate(email)) {
-        message.message1 = "Email not validated";
+        return res.status(221).json({error:"Email not validated."});
     }
     else {
         //search the given email in db
@@ -53,7 +54,7 @@ app.post('/api/register', async (req, res) => {
             .then(user => {
                 if (user) {
                     // user exists
-                    message.message1 = "Email already exist"
+                    return res.status(221).json({error:"Email already exists."});
                 }
                 else {
                     var val = Math.floor(1000 + Math.random() * 9000);

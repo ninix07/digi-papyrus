@@ -1,0 +1,12 @@
+.digianimation{
+    margin: 50px 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.digianimation h1{
+    font-size: 184px;
+    font-weight: lighter;
+    align-self: center;
+    color: brown;
+}

@@ -11,9 +11,9 @@ function App() {
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
     const [password2, setpassword2] = useState('');
-    const [error,setError] = useState(1);
-    const [message,setMessage] = useState('');
-    const [linkhere,setLinkhere] = useState('');
+    const [error, setError] = useState(1);
+    const [message, setMessage] = useState('');
+    const [linkhere, setLinkhere] = useState('/signup');
 
     //function 
     //@params e event
@@ -29,30 +29,24 @@ function App() {
             password2: password2,
         })
             .then(res => {
-                console.log(res);
-                console.log(res.data);
-
-            })
-        axios.get('http://localhost:5000/message')
-            .then(res => {
-                console.log(res)
-                setMessage(res.data.message1)
+                setMessage(res.data.error);
                 if (message) {
-                    setError(1);
+                    setError(1)
                 }
-                else{
-                    setError(0);
+                else {
+                    setError(0)
                 }
+
             })
 
 
-        if (error === 0) {
-            setLinkhere('/transition')
-            console.log("no error foundd")
+        if (error === 1) {
+            setLinkhere('/signup')
+            console.log(' error')
         }
         else {
-            setLinkhere('/signup')
-            console.log('error found')
+            setLinkhere('/transition')
+            console.log('no error')
         }
         console.log("end  " + error + '\n' + message);
     }
@@ -91,7 +85,6 @@ function App() {
             <p style={{ color: "red" }}> {message} </p>
             <Link onClick={addtolist} to={linkhere}>
                 <button
-
                     className="sumbit">
                     Continue
                 </button>
