@@ -4,12 +4,13 @@ function Digianimation() {
     return (
         <div className="digianimation">
             <h1>
-                <Typical Loop={Infinity}
+                <Typical Loop={10}
                     wrapper="b"
                     steps={
-                        ['Digi-Papyrus', 1000, 'The New Way of Reading']
+                        ['Digi-Papyrus',100,'Digi-Papyrus']
                     }></Typical>
             </h1>
+            <h2>New way of reading.</h2>
         </div>
     )
 }

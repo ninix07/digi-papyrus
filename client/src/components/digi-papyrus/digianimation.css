@@ -1,12 +1,14 @@
 .digianimation{
-    margin: 50px 300px;
+    height: 90vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 300px;
+    margin-right: 300px;
+    padding-bottom: 50px;
+
 }
 .digianimation h1{
-    font-size: 184px;
-    font-weight: lighter;
-    align-self: center;
-    color: brown;
+    font-size: 124px;
+    color: black;
 }

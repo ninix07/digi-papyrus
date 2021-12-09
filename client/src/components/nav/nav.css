@@ -7,7 +7,7 @@ html{
 }
 .nav{
   overflow: hidden;
-  height: 10%;
+  height: 10vh;
   margin: 20px 20px;
   display: flex;
   align-items: center;
