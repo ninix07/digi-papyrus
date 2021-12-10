@@ -7,13 +7,11 @@ import Newpassword from './components/login/newpassword';
 import Forget from './components/login/forget'
 import Nav from './components/nav/nav';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Digianimation from './components/digi-papyrus/digianimation';
 function App() {
   return (
     <Router>
       <div className="app">
         <Nav />
-        <Digianimation/>
         {/* changing the links using route and links */}
         <Route path="/" exact component={Bookpage} />
         <Route path="/login" exact component={Login} />

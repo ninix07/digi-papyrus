@@ -11,16 +11,13 @@ function App() {
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
     const [password2, setpassword2] = useState('');
-    const [error, setError] = useState(1);
-    const [message, setMessage] = useState('');
-    const [linkhere, setLinkhere] = useState('/signup');
+    const [message, setMessage] = useState("");
+    const [linkhere, setLinkhere] = useState('/signup')
 
     //function 
     //@params e event
     //brief: cheaks all the validity and sends the api reqeust
     const addtolist = async (e) => {
-
-        e.preventDefault();
         // url wehre the data should be post 
         axios.post('http://localhost:5000/api/register/', {
             name: name,
@@ -29,26 +26,17 @@ function App() {
             password2: password2,
         })
             .then(res => {
-                setMessage(res.data.error);
-                if (message) {
-                    setError(1)
+                if (res.data.error !== "") {
+                    setLinkhere('/signup')
+                    setMessage(res.data.error)
                 }
                 else {
-                    setError(0)
+                    setLinkhere('/transition')
+
                 }
 
             })
 
-
-        if (error === 1) {
-            setLinkhere('/signup')
-            console.log(' error')
-        }
-        else {
-            setLinkhere('/transition')
-            console.log('no error')
-        }
-        console.log("end  " + error + '\n' + message);
     }
 
 
@@ -83,13 +71,14 @@ function App() {
                 }} />
 
             <p style={{ color: "red" }}> {message} </p>
-            <Link onClick={addtolist} to={linkhere}>
-                <button
-                    className="sumbit">
-                    Continue
-                </button>
-            </Link>
-
+            <div onClick={addtolist}>
+                <Link to={linkhere}>
+                    <button
+                        className="sumbit">
+                        Continue
+                    </button>
+                </Link>
+            </div>
         </div>
     );
 }

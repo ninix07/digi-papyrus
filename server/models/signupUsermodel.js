@@ -15,13 +15,7 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  },
-  otp: {
-    type: String,
-    default: Date.now,
-    expires: 60,
   }
-
 });
 
 const User = mongoose.model("User", UserSchema);

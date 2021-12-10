@@ -7,7 +7,7 @@ function Digianimation() {
                 <Typical Loop={10}
                     wrapper="b"
                     steps={
-                        ['Digi-Papyrus',100,'Digi-Papyrus']
+                        ['Digi-Papyrus', 100, 'Digi-Papyrus']
                     }></Typical>
             </h1>
             <h2>New way of reading.</h2>
