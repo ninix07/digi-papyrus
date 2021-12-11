@@ -1,7 +1,7 @@
 import './loginstyle.css';
 import { useState } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -12,12 +12,12 @@ function App() {
     const [password, setpassword] = useState('');
     const [password2, setpassword2] = useState('');
     const [message, setMessage] = useState("");
-    const [linkhere, setLinkhere] = useState('/signup')
-
+    const history = useHistory();
     //function 
     //@params e event
     //brief: cheaks all the validity and sends the api reqeust
     const addtolist = async (e) => {
+        e.preventDefault();
         // url wehre the data should be post 
         axios.post('http://localhost:5000/api/register/', {
             name: name,
@@ -27,11 +27,11 @@ function App() {
         })
             .then(res => {
                 if (res.data.error !== "") {
-                    setLinkhere('/signup')
+                    history.push('/signup')
                     setMessage(res.data.error)
                 }
                 else {
-                    setLinkhere('/transition')
+                    history.push('/transition')
 
                 }
 
@@ -39,7 +39,7 @@ function App() {
 
     }
 
-
+    // goodnight i sleep¿
 
     return (
         <div className="login">
@@ -71,14 +71,10 @@ function App() {
                 }} />
 
             <p style={{ color: "red" }}> {message} </p>
-            <div onClick={addtolist}>
-                <Link to={linkhere}>
-                    <button
-                        className="sumbit">
-                        Continue
-                    </button>
-                </Link>
-            </div>
+            <button onClick={addtolist}
+                className="sumbit">
+                Continue
+            </button>
         </div>
     );
 }

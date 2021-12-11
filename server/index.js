@@ -11,7 +11,6 @@ const validator = require("email-validator");
 
 //importing schema
 const UserModel = require('./models/signupUsermodel');
-const { findOne } = require('./models/signupUsermodel');
 
 //for json used in api 
 app.use(express.json());
@@ -40,12 +39,13 @@ var password;
 app.post('/api/transition', async (req, res) => {
     transitionPin = req.body.transitionPin;
     if (transitionPin == val) {
+        let hashedPass = bcrypt.hashSync(password, 10);
         const user1 = new UserModel({
             name: name,
             email: email,
-            password: password,
+            password: hashedPass,
         })
-        user1.password = bcrypt.hashSync(user1.password, 10);
+        console.log(user1.password)
         try {
             user1.save();
             console.log('datasaved');
@@ -53,6 +53,7 @@ app.post('/api/transition', async (req, res) => {
         catch (err) {
             console.log(err);
         }
+
     }
     else {
         console.log('Wrong transition pin')
@@ -95,8 +96,8 @@ app.post('/api/register', async (req, res) => {
                 }
                 else {
                     res.status(221).json({ error: "" });
-                    // console.log('here');
-                    // otp_sender(email);
+                    console.log('here');
+                    otp_sender(email);
                 }
             })
     }
@@ -122,26 +123,29 @@ function otp_sender(object) {
 app.post('/api/login', async (req, res) => {
     const email = req.body.username;
     const password = req.body.password;
-    console.log("Data Taken ie  " + email + "   " + password)
+    console.log("Data Taken is  " + email + "   " + password)
 
-    UserModel.findOne({ email: email })
+    UserModel.findOne(({ email: email }))
         .then(user => {
             if (user) {
                 // user exists
-                const isMatch = bcrypt.compare(user.password, password);
+                const isMatch = bcrypt.compareSync(password, user.password);
+                console.log(isMatch)
                 if (isMatch) {
-                    console.log("password matched")
+                    console.log('password matched')
+                    return res.status(222).json({ error: "password matched" })
                 }
                 else {
-                    console.log("not matched")
+                    console.log('incorrect password')
+                    return res.status(222).json({ error: "Incorrect Password" })
                 }
             }
             else {
-                console.log("emailnotregistered")
+                console.log('email not gound')
+                return res.status(222).json({ error: "Email not found" })
             }
         })
 })
-
 
 //starts the server
 app.listen(5000, () => {
