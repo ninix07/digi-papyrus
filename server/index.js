@@ -36,27 +36,33 @@ var val;
 var name;
 var email;
 var password;
+var transitionfrom;
 app.post('/api/transition', async (req, res) => {
     transitionPin = req.body.transitionPin;
     if (transitionPin == val) {
-        let hashedPass = bcrypt.hashSync(password, 10);
-        const user1 = new UserModel({
-            name: name,
-            email: email,
-            password: hashedPass,
-        })
-        console.log(user1.password)
-        try {
-            user1.save();
-            console.log('datasaved');
+        if (transitionfrom === 'register') {
+
+            const user1 = new UserModel({
+                name: name,
+                email: email,
+                password: password,
+            })
+            try {
+                user1.save();
+                console.log('datasaved');
+                res.status(223).json({ error: "from register" })
+            }
+            catch (err) {
+                console.log(err);
+            }
         }
-        catch (err) {
-            console.log(err);
+        else if (transitionfrom === 'forget') {
+            res.status(223).json({ error: "from forget" })
         }
 
     }
     else {
-        console.log('Wrong transition pin')
+        res.status(223).json({ error: "Wrong Transition Pin" })
     }
 
 })
@@ -67,7 +73,7 @@ app.post('/api/resend', async (req, res) => {
 app.post('/api/register', async (req, res) => {
     name = req.body.name;
     email = req.body.email;
-    password = req.body.password;
+    password = bcrypt.hashSync(req.body.password, 10);
     const password2 = req.body.password2;
 
     if (!name || !email || !password || !password2) {
@@ -98,6 +104,7 @@ app.post('/api/register', async (req, res) => {
                     res.status(221).json({ error: "" });
                     console.log('here');
                     otp_sender(email);
+                    transitionfrom = "signup"
                 }
             })
     }
@@ -146,6 +153,54 @@ app.post('/api/login', async (req, res) => {
             }
         })
 })
+app.post('/api/forget', async (req, res) => {
+    email = req.body.email;
+    if (!email) {
+        return res.status(223).json({ error: 'Please fill the form' })
+    };
+    UserModel.findOne({ email: email })
+        .then(user => {
+            if (!user) {
+                return res.status(223).json({ error: 'Email not found' })
+            }
+            else {
+                transitionfrom = "forget";
+                res.status(223).json({ error: '' })
+                otp_sender(email);
+            }
+        })
+})
+app.post('/api/newpassword', async (req, res) => {
+    const password = req.body.password;
+    const password2 = req.body.password2;
+    if (password != password2) {
+        console.log("Password not matched")
+        return res.status(224).json({ error: "Password not matched" })
+    }
+    else if (password.length < 6) {
+        console.log("Password too short")
+        return res.status(224).json({ error: "Password too short" })
+    }
+    else {
+        let hashedPass = bcrypt.hashSync(password, 10)
+        res.status(224).json({ error: "" })
+        try {
+            UserModel.findOne({ email: email })
+                .then((user) => {
+                    UserModel.findById(user._id, (err, updatedPassword) => {
+                        updatedPassword.password = hashedPass;
+                        updatedPassword.save();
+                        console.log('saved')
+                    })
+                }
+                )
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+}
+)
 
 //starts the server
 app.listen(5000, () => {
