@@ -59,7 +59,6 @@ app.post('/api/transition', async (req, res) => {
         else if (transitionfrom === 'forget') {
             res.status(223).json({ error: "from forget" })
         }
-
     }
     else {
         res.status(223).json({ error: "Wrong Transition Pin" })
