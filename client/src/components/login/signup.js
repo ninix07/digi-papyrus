@@ -32,14 +32,11 @@ function App() {
                 }
                 else {
                     history.push('/transition')
-
                 }
-
             })
 
     }
 
-    // goodnight i sleep¿
 
     return (
         <div className="login">

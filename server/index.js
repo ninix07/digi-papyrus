@@ -41,7 +41,6 @@ app.post('/api/transition', async (req, res) => {
     transitionPin = req.body.transitionPin;
     if (transitionPin == val) {
         if (transitionfrom === 'register') {
-
             const user1 = new UserModel({
                 name: name,
                 email: email,
