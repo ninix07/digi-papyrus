@@ -17,6 +17,7 @@ function App() {
     //@params e event
     //brief: cheaks all the validity and sends the api reqeust
     const addtolist = async (e) => {
+
         e.preventDefault();
         // url wehre the data should be post 
         axios.post('http://localhost:5000/api/register/', {
@@ -26,12 +27,13 @@ function App() {
             password2: password2,
         })
             .then(res => {
+                console.log("data send" + name)
                 if (res.data.error !== "") {
                     history.push('/signup')
                     setMessage(res.data.error)
                 }
                 else {
-                    history.push('/transition')
+                    history.push('/')
                 }
             })
 

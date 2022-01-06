@@ -8,6 +8,7 @@ function Login() {
     const [password, setpassword] = useState('');
     const [message, setMessage] = useState('');
     let history = useHistory();
+
     const loginPostdata = async (e) => {
         e.preventDefault();
         const url = 'http://localhost:5000/api/login/'
@@ -16,11 +17,12 @@ function Login() {
             password: password,
         })
             .then(res => {
+                console.log("Data sent")
                 if (res.data.error === "password matched") {
                     history.push('/')
                 }
-                else{
-                setMessage(res.data.error);
+                else {
+                    setMessage(res.data.error);
                 }
             })
     }
@@ -45,7 +47,7 @@ function Login() {
             <button className="sumbit" onClick={loginPostdata}>Continue</button>
             {/* </Link> */}
 
-            <p><Link to="/forget">Forget your password?</Link> </p>
+            {/* <p><Link to="/forget">Forget your password?</Link> </p> */}
             <p>Don't have an account? <Link to="/signup">Register now</Link> </p>
         </div>
     )
