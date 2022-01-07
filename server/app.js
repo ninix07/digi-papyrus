@@ -11,6 +11,10 @@ const cookieParser = require("cookie-parser");
 const PORT = 3000;
 const cors = require('cors')
 const User = require("./userschema.js");
+const multer= require("multer");
+const {GridFsStorage} = require('multer-gridfs-storage');
+
+
 dotenv.config({ path: "./config.env" });
 
 app.use(cors());
@@ -21,6 +25,8 @@ app.use(cookieParser())
 const URL = process.env.URL;
 
 mongoose.connect(URL, { useNewUrlParser: true });
+
+
 
 // app.get("/", (req, res) => {
 //     res.sendFile(__dirname + "/home.html");
@@ -96,6 +102,9 @@ app.post("/api/login/", async (req, res) => {
     const email = req.body.username;
     const password = req.body.password;
     console.log(email)
+    if(!email||!password){
+        res.status(221).json({error:"Please fill the fields"})
+    }
     User.findOne({ email: email }, async (error, foundUser) => {
         if (error) {
             console.log(error);
@@ -142,7 +151,32 @@ app.listen(5000, () => {
     console.log(`The server is running on port 5000`);
 })
 
+const storage = new GridFsStorage({
+    url:process.env.URL,
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(16, (err, buf) => {
+          if (err) {
+            return reject(err)
+          }
+          const filename = file.originalname
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'uploads',
+          }
+          resolve(fileInfo)
+        })
+      })
+    },
+  })
+  
+  const upload = multer({ storage })
 
 
+  app.post('/api/upload/', upload.single("file"), (req, res, err) => {
+    
+    if (err) throw err
+    res.status(201).send()
+  })
 
 

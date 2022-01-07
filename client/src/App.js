@@ -6,6 +6,7 @@ import Transition from './components/login/transition'
 import Newpassword from './components/login/newpassword';
 import Forget from './components/login/forget'
 import Nav from './components/nav/nav';
+import AddBook from './components/books/bookupload';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path='/transition' exact component={Transition} />
         <Route path='/newpassword' exact component={Newpassword} />
         <Route path='/forget' exact component={Forget} />
+        <Route path='/AddBooks' exact component={AddBook} />
+        
       </div>
     </Router>
   )

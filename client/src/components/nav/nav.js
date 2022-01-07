@@ -52,7 +52,9 @@ function Nav() {
                 <Link to="/login">
                     <h1>Login|SignUP</h1>
                 </Link>
+                <Link to="/AddBooks">
                 <h1>Publish Book</h1>
+                </Link>
                 <h1>Source Code</h1>
             </div>
         </div>
