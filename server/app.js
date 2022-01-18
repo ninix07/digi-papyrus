@@ -11,8 +11,12 @@ const cookieParser = require("cookie-parser");
 const PORT = 3000;
 const cors = require('cors')
 const User = require("./userschema.js");
-const multer= require("multer");
+const multer= require('multer');
 const {GridFsStorage} = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const crypto= require('crypto');
+const path= require('path');
+const { connect } = require("http2");
 
 
 dotenv.config({ path: "./config.env" });
@@ -24,8 +28,18 @@ app.use(cookieParser())
 
 const URL = process.env.URL;
 
-mongoose.connect(URL, { useNewUrlParser: true });
+const conn = mongoose.createConnection(URL, { 
+        useNewUrlParser: true ,
+        useUnifiedTopology: true,
+    });
 
+//initializing gridfs
+let gfs;
+conn.once('open',()=>{
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('bookUploads');
+  });
+  
 
 
 // app.get("/", (req, res) => {
@@ -152,31 +166,27 @@ app.listen(5000, () => {
 })
 
 const storage = new GridFsStorage({
-    url:process.env.URL,
+    url: URL,
     file: (req, file) => {
       return new Promise((resolve, reject) => {
         crypto.randomBytes(16, (err, buf) => {
           if (err) {
-            return reject(err)
+            return reject(err);
           }
-          const filename = file.originalname
+          const filename = buf.toString('hex') + path.extname(file.originalname);
           const fileInfo = {
             filename: filename,
-            bucketName: 'uploads',
-          }
-          resolve(fileInfo)
-        })
-      })
+            bucketName: 'bookUploads',
+          };
+          resolve(fileInfo);
+        });
+      });
     },
-  })
+  });
   
-  const upload = multer({ storage })
-
-
-  app.post('/api/upload/', upload.single("file"), (req, res, err) => {
-    
-    if (err) throw err
-    res.status(201).send()
-  })
-
-
+  const upload = multer({
+    storage,
+  });
+  app.post('/api/upload/', upload.single('File'), (req, res, err) => {
+    res.json({file:req.file});
+   })

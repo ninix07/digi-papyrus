@@ -17,6 +17,7 @@ function BookUpload() {
 
 	const changeHandler = (e) => {
 		setSelectedFile(e.target.files[0]);
+        console.log(e.target.files[0]);
 		setIsSelected(true);
 	};
 
@@ -26,27 +27,37 @@ function BookUpload() {
     //@params e event
     //brief: cheaks all the validity and sends the api reqeust
     const addtolist = async (e) => {
-        const file = document.getElementById('inputGroupFile01').files
+        console.log("At add to list");
         e.preventDefault();
-        let formData= new FormData();
-        formData.append('img',file);
-        axios.post('http://localhost:5000/api/upload/',formData, {
-            
-            headers: {
-                'Content-Type': "multipart/form-data",
-              },
+        const formData= new FormData();
+        
+        formData.append('File',selectedFile);
+        // axios.post('http://localhost:5000/api/upload/',formData, {
 
-        })
-            .then(res => {
-                console.log("data send")
-                if (res.data.error !== "") {
-                    history.push('/AddBooks')
-                    setMessage(res.data.error)
-                }
-                else {
-                    history.push('/')
-                }
-            })
+        // })
+        //     .then(res => {
+        //         console.log("data send")
+        //         if (res.data.error !== "") {
+        //             history.push('/AddBooks')
+        //             setMessage(res.data.error)
+        //         }
+        //         else {
+        //             history.push('/')
+        //         }
+        //     })
+        await fetch("http://localhost:5000/api/upload", {
+            method: "POST",
+            body: formData,
+           })
+           .then((response) => response.json())
+           .then((result) => {
+            console.log("Success:", result);
+           })
+           .catch((error) => {
+             console.error("Error:", error);
+            });
+           
+
 
     };
     
@@ -54,7 +65,7 @@ function BookUpload() {
         <div className="login">
 
             <p style={{ color: "red" }}> {message} </p>
-            <input type="file" name="file" id="inputGroupFile01" onChange={changeHandler} />
+            <input type="file" name="File" id="inputGroupFile01" onChange={changeHandler} />
 			{isSelected ? (
 				<div>
 					<p>Filename: {selectedFile.name}</p>
