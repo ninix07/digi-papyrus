@@ -5,10 +5,11 @@ import { useHistory } from 'react-router-dom';
 
 
 
+
 function BookUpload() {
     //use states to change the variable on change
-    const [Author,setAuthor] = useState('');
-    const [BookName,setBookName] = useState('');
+    const [Sender,setSender] = useState('');
+    const [BookName,setReciever] = useState('');
     const [message,setMessage] = useState('');
     const history = useHistory();
     const [selectedFile, setSelectedFile] = useState();
@@ -27,36 +28,27 @@ function BookUpload() {
     //@params e event
     //brief: cheaks all the validity and sends the api reqeust
     const addtolist = async (e) => {
-        console.log("At add to list");
+        
         e.preventDefault();
         const formData= new FormData();
         
         formData.append('File',selectedFile);
-        // axios.post('http://localhost:5000/api/upload/',formData, {
+        formData.append('Sender',Sender);
+        formData.append('BookName',BookName);
+        axios.post('http://localhost:5000/api/upload/',formData, {
 
-        // })
-        //     .then(res => {
-        //         console.log("data send")
-        //         if (res.data.error !== "") {
-        //             history.push('/AddBooks')
-        //             setMessage(res.data.error)
-        //         }
-        //         else {
-        //             history.push('/')
-        //         }
-        //     })
-        await fetch("http://localhost:5000/api/upload", {
-            method: "POST",
-            body: formData,
-           })
-           .then((response) => response.json())
-           .then((result) => {
-            console.log("Success:", result);
-           })
-           .catch((error) => {
-             console.error("Error:", error);
-            });
-           
+        })
+            .then(res => {
+                console.log("Success data sent")
+                if (res.data.error !== "") {
+                    history.push('/AddBooks')
+                    setMessage(res.data.error)
+                }
+                else {
+                    history.push('/')
+                }
+            })
+    
 
 
     };
@@ -65,7 +57,19 @@ function BookUpload() {
         <div className="login">
 
             <p style={{ color: "red" }}> {message} </p>
-            <input type="file" name="File" id="inputGroupFile01" onChange={changeHandler} />
+            <input type="file" name="File" id="inputFile01" onChange={changeHandler} />
+            <input
+                type="textbox"
+                placeholder="Book Name"
+                onChange={(event) => {
+                    setReciever(event.target.value)
+                }} />
+            <input
+                type="textbox"
+                placeholder="Sender"
+                onChange={(event) => {
+                    setSender(event.target.value)
+                }} />
 			{isSelected ? (
 				<div>
 					<p>Filename: {selectedFile.name}</p>
@@ -75,6 +79,7 @@ function BookUpload() {
 				</div>
 			) : (
 				<p>Select a file</p>
+            
 			)}
             <button onClick={addtolist}
                 className="sumbit">

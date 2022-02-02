@@ -1,10 +1,46 @@
 import Bookself from './bookself'
 import './bookpage.css'
 import Digianimation from '../digi-papyrus/digianimation';
+import  gsap  from "gsap";
+import {useRef, useEffect} from "react";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+
+
 function Bookpage() {
+    gsap.registerPlugin(ScrollTrigger);
+    const ref = useRef(null);
+    useEffect(() => {
+      const element = ref.current;
+      gsap.fromTo(
+        element.querySelector(".first-paragraph"),
+        {
+          opacity: 0,
+          y: -20,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: element.querySelector(".first-paragraph"),
+            start: "top top",
+            end: "bottom center",
+            scrub: true,
+          },
+        }
+      );
+    }, []);
+   
     return (
         <div>
             <Digianimation />
+            <div ref= {ref}>
+            <div className="GSA" >Use me when you see me.</div>
+            <p className="first-paragraph">
+          is the coolest Greensock plugin.
+          
+        </p>
+            </div>
             <div className="books">
                 <Bookself content="Recently read" books={[
                     {

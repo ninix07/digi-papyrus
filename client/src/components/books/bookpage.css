@@ -2,4 +2,13 @@
 .books{
     margin: 200px;
   }
-  
+  .GSA{
+    margin-top: 2vh;
+   width: 46vw;
+    padding: 2vh 3vw;
+    border: none;
+    font-weight: bold;
+    color: #23272B;
+    font-size: large;
+    background-color: #8CC0DF;
+  }

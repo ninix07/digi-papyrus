@@ -188,5 +188,6 @@ const storage = new GridFsStorage({
     storage,
   });
   app.post('/api/upload/', upload.single('File'), (req, res, err) => {
-    res.json({file:req.file});
+    res.json({File:req.file});
+    
    })
